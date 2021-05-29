@@ -46,16 +46,43 @@ while True:
     if event.action == "pressed":  # actions are- pressed, held and released
      
       if event.direction == "up":
-        setDirection(0)
+        if length > 1:  
+          if direction == [0, 1]:
+            setDirection(2)
+          else:
+            setDirection(0)
+        else:
+            setDirection(0)
+     
       elif event.direction == "right":
-        setDirection(1)
+        if length > 1:
+          if direction == [-1, 0]:
+            setDirection(3)
+          else:
+            setDirection(1)
+        else:
+         setDirection(1)
+      
       elif event.direction == "down":
-        setDirection(2)
+        if length > 1:
+          if direction == [0, -1]:
+            setDirection(0)
+          else:
+            setDirection(2)
+        else:
+         setDirection(2)
+      
       elif event.direction == "left":
-        setDirection(3)
+        if length > 1:
+          if direction == [1, 0]:
+            setDirection(1)
+          else:
+            setDirection(3)
+        else:
+          setDirection(3)
   
   snake.insert(0, [snake[0][0] + direction[0], snake[0][1] + direction[1]])
-  
+   
   if snake[0][0] < 0:  # game boundaries
     sense.show_message("Game Over")
     x = "Score: " +  str(len(snake) - 2)
@@ -107,9 +134,9 @@ while True:
   pixels[foodPos[1] * 8 + foodPos[0]] = red  #y * rowSize + x, covert 2D coordinate into 1D coordinate for foodPos
   sense.set_pixels(pixels)
   snake_speed = 0.1*(len(snake) -2)
-  if snake_speed < 0.7:
+  if snake_speed < 0.8:
     time.sleep(1 - 0.1*(len(snake) -2))
   else:
-    time.sleep(0.3)
+    time.sleep(0.2)
   
   
